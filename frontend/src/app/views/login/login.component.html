@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="card text-center">
+      <div class="card-header">
+        <b>LOGIN - ONLY CHAT</b>
+      </div>
+      <div class="card-body p-4">
+  
+        
+          <label style="float: left;" for="">Email</label>
+          <input class="form-control m-2" type="email" placeholder="Insira seu email" [(ngModel)]="requestLogin.email">
+  
+          <label style="float: left;" for="">Senha</label>
+          <input class="form-control m-2" type="password" placeholder="Insira sua senha" [(ngModel)]="requestLogin.password">
+          
+          <button class="btn btn-primary btn-block m-2" (click)="Entrar()">Entrar</button>
+          <label>Ainda não possui uma conta? <a href="/cadastro">Cadastre-se</a></label>
+
+        
+      </div>
+      
+    </div>
+  </div>

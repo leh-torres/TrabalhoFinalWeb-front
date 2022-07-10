@@ -1,0 +1,10 @@
+@import 'material-icons/iconfont/material-icons.css';
+.container-chats{
+    width: 70vw;
+    margin-left: 15%;
+    margin-top: 3%;
+}
+
+.red-color{
+    color: red;
+}
