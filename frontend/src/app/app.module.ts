@@ -4,11 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http'
 
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { CadastroComponent } from './views/cadastro/cadastro.component';
 import { HomeComponent } from './views/home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -23,7 +28,10 @@ import { HomeComponent } from './views/home/home.component';
     AppRoutingModule,
     FormsModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

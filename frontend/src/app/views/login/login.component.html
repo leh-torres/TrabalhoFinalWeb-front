@@ -4,15 +4,27 @@
         <b>LOGIN - ONLY CHAT</b>
       </div>
       <div class="card-body p-4">
-  
         
-          <label style="float: left;" for="">Email</label>
-          <input class="form-control m-2" type="email" placeholder="Insira seu email" [(ngModel)]="requestLogin.email">
-  
-          <label style="float: left;" for="">Senha</label>
-          <input class="form-control m-2" type="password" placeholder="Insira sua senha" [(ngModel)]="requestLogin.password">
+          <form (ngSubmit)="formSubmit()">
+            <label style="float: left;" for="">Username</label>
+            <input class="form-control m-2" 
+              type="text" 
+              placeholder="Insira seu username" 
+              [(ngModel)]="loginData.username"
+              name="username"
+              required>
+    
+            <label style="float: left;" for="">Senha</label>
+            <input class="form-control m-2" 
+              type="password" 
+              placeholder="Insira sua senha" 
+              [(ngModel)]="loginData.password"
+              name="password"
+              required>
           
-          <button class="btn btn-primary btn-block m-2" (click)="Entrar()">Entrar</button>
+          <button class="btn btn-primary btn-block m-2" type="submit">Entrar</button>
+
+          </form>
           <label>Ainda não possui uma conta? <a href="/cadastro">Cadastre-se</a></label>
 
         

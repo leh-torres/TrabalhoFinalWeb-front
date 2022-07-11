@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Lab11BackApplication<lab_11_back>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.lab_11_back.Lab11BackApplication",
+            "projectName": "lab_11_back",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

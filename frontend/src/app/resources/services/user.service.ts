@@ -4,9 +4,12 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-
+  public addUser(user: any){
+    return this.httpClient.post(`/user`, user)
+  }
+  
 }

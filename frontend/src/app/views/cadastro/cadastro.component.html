@@ -6,33 +6,42 @@
     <form class="card-header">
         <div class="form-group">
             <label>Nome</label>
-            <input type="text" class="form-control" placeholder="Nome Completo">
+            <input type="text" class="form-control" placeholder="Nome Completo" required [(ngModel)]='dadosCadastro.nome'>
         </div>
         <div class="form-group">
           <label>Email</label>
-          <input type="text" class="form-control" placeholder="Exemplo@gmail.com">
+          <input type="text" class="form-control" placeholder="Exemplo@gmail.com" required [(ngModel)]="dadosCadastro.email">
         </div>
         <div class="form-group">
           <label>Link para imagem de perfil</label>
-          <input type="text" class="form-control" placeholder="https://cdn.pixabay.com/photo/2016/03/31/19/58/avatar-1295429_960_720.png">
+          <input type="text" class="form-control" placeholder="https://cdn.pixabay.com/photo/2016/03/31/19/58/avatar-1295429_960_720.png" required [(ngModel)]="dadosCadastro.linkImg">
         </div>
         <div class="form-group">
             <label>Gênero</label>
-            <select class="form-control">
-              <option selected>Feminino</option>
-              <option>Masculino</option>
-              <option>Não-binário</option>
+            <select class="form-control" required>
+              <option *ngFor="let i of opcoesGenero" [(ngModel)]="dadosCadastro.genero" name="genero">{{i}}</option>
             </select>
           </div>
         
         <div class="form-group">
             <label>Senha</label>
-            <input type="password" class="form-control">
+            <input 
+              required 
+              type="password" 
+              class="form-control" 
+              [(ngModel)]="dadosCadastro.password" 
+              name="password"
+              >
         </div>
         <div class="form-group">
-            <label>Confirme sua senha</label>
-            <input type="password" class="form-control">
+            <label>Confirmar senha</label>
+            <input 
+              type="password" 
+              class="form-control" 
+              [(ngModel)]="dadosCadastro.confirm_password" 
+              name="confirm_password"
+              required>
         </div>
-        <button type="submit" class="btn btn-primary btn-block mt-1">Cadastre-se</button>
+        <button type="submit" class="btn btn-primary btn-block mt-1" (click)="validar()">Cadastre-se</button>
       </form>
 </div>

@@ -4,3 +4,7 @@
     height: 80vw;
     margin-top: 7%;
 }
+
+.error-msg{
+    color: red;
+}

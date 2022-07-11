@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestLogin } from 'src/app/resources/models/RequestLogin';
+import { MatSnackBar} from '@angular/material/snack-bar'
 import { LoginService } from 'src/app/resources/services/login.service';
 
 @Component({
@@ -9,25 +9,35 @@ import { LoginService } from 'src/app/resources/services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  public requestLogin: RequestLogin = new RequestLogin;
+  loginData={
+    username: '',
+    password: ''
+  }
 
   title = 'frontend';
 
-  constructor(private loginService: LoginService) {}
+  constructor(private snack: MatSnackBar, private login: LoginService) {}
 
   ngOnInit(): void {
-    this.requestLogin = new RequestLogin();
   }
 
-  public Entrar(): void{
-    this.loginService.Entrar(this.requestLogin).subscribe(
-      (data) => {
-        console.log(data)
-      },
-      (error) => {
-        console.log(error)
-      }
-    )}
 
+  formSubmit(){
+    console.log('console formSubmit')
 
+    if(this.loginData.username.trim() == '' || this.loginData.username ==null){
+      this.snack.open('O username não pode ser vazio!', '',{
+        duration:3000,       
+      })
+      return
+    }
+
+    if(this.loginData.password.trim() == '' || this.loginData.password ==null){
+      this.snack.open('A senha não pode ser vazio!', '',{
+        duration:3000,       
+      })
+      return
+    }
+
+  }
 }
