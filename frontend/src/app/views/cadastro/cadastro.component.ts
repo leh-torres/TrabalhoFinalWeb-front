@@ -54,19 +54,23 @@ export class CadastroComponent implements OnInit {
         duration:3000,       
       })
       
-      this.user.nome = this.formCadastro.value.nome
+      this.user.name = this.formCadastro.value.nome
       this.user.email = this.formCadastro.value.email
-      this.user.linkImg = this.formCadastro.value.img
+      this.user.imageUrl = this.formCadastro.value.img
       this.user.genero = this.formCadastro.value.genero
       this.user.password = this.formCadastro.value.confirmSenha
 
       return
     }
-    
-
-    this.formCadastro.reset(new DadosCadastro())
+    console.log(this.user)
     let retorno = this.userService.addUser(this.user)
-    console.log(retorno)
+    this.formCadastro.reset(new DadosCadastro())
+    
+    console.log(retorno.subscribe((erro) => 
+      {
+       console.log(erro) 
+      }
+    ))
   }
 
 }

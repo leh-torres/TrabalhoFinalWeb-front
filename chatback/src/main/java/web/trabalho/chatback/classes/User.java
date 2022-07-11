@@ -19,6 +19,7 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
+    private String genero;
     private String imageUrl;
 
     @ElementCollection
@@ -28,12 +29,13 @@ public class User {
         
     }
 
-    public User(int id, String name, String email, String password, String imageUrl, List<User> usersAmigos) {
+    public User(int id, String name, String email, String password, String imageUrl, List<User> usersAmigos, String genero) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.imageUrl = imageUrl;
+        this.genero = genero;
         this.usersAmigos = usersAmigos;
     }
 
@@ -83,6 +85,14 @@ public class User {
 
     public void setUsersAmigos(List<User> usersAmigos) {
         this.usersAmigos = usersAmigos;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
 }
