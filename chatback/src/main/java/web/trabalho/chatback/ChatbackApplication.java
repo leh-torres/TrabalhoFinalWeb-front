@@ -1,4 +1,4 @@
-package com.example.lab_11_back;
+package web.trabalho.chatback;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,10 +7,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-public class Lab11BackApplication {
+public class ChatbackApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Lab11BackApplication.class, args);
+		SpringApplication.run(ChatbackApplication.class, args);
 	}
 
 	@Bean

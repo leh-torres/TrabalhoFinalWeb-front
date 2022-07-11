@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Usuarios } from 'src/app/resources/models/Usuarios';
+import { DadosCadastro } from 'src/app/resources/models/Dadoscadastro';
+import  {  FormBuilder,  FormGroup  }  from  '@angular/forms';
 
 @Component({
   selector: 'app-cadastro',
@@ -9,36 +10,28 @@ import { Usuarios } from 'src/app/resources/models/Usuarios';
 })
 export class CadastroComponent implements OnInit {
 
-  dadosCadastro={
-    nome:'',
-    email:'',
-    linkImg:'',
-    genero:'',
-    password:'',
-    confirm_password:'',
-  }
+  formCadastro!: FormGroup
 
-  opcoesGenero = [
-    {id: 0,nome: 'Feminino'},
-    {id: 1,nome: 'Masculino'},
-    {id: 2,nome: 'Não Binário'},
-  ]
-    
-
-  constructor(private snack: MatSnackBar) { }
+  constructor(private snack: MatSnackBar, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.creatForm(new DadosCadastro())
   }
 
-  validar(){
-    console.log(this.dadosCadastro.genero)
+  creatForm(dadosCadastro: DadosCadastro){
+    this.formCadastro = this.formBuilder.group({
+      nome: [dadosCadastro.nome],
+      email: [dadosCadastro.email],
+      img: [dadosCadastro.linkImg],
+      genero: [dadosCadastro.genero],
+      senha: [dadosCadastro.password],
+      confirmSenha: [dadosCadastro.confirm_password]
+    })
+  }
 
-    if(this.dadosCadastro.password != this.dadosCadastro.confirm_password){
-      this.snack.open('Senhas diferentes!', 'Fechar',{
-        duration:3000,       
-      })
-      return 
-    }
+  onSubmit(){
+    console.log(this.formCadastro.value)
+    this.formCadastro.reset(new DadosCadastro())
   }
 
 }

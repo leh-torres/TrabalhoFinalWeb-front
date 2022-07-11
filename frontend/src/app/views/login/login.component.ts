@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   title = 'frontend';
 
-  constructor(private snack: MatSnackBar, private login: LoginService) {}
+  constructor(private snack: MatSnackBar) {}
 
   ngOnInit(): void {
   }
