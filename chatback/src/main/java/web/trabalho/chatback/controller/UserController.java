@@ -59,4 +59,29 @@ public class UserController {
         return amigosAux;
     }
 
+    @GetMapping("/adicionarAmigos")
+    public Iterable<User> retornaUsuarios(@RequestHeader String email,@RequestHeader String password){
+        int id = userRepository.findByEmailAndPassword(email,password).getId();
+        List<User> amigos = userRepository.findById(id).get().getUsersAmigos();
+        Iterable<User> naoAmigos = userRepository.findAll();
+        System.out.println(id);
+        List<User> amigosAux = new ArrayList<>();
+        boolean testa = true;
+
+        for (User naoAmigo : naoAmigos) {
+            for (User amigo : amigos) {
+                if(amigo == naoAmigo){
+                    testa = false;
+                }
+            }
+            if(testa == true && naoAmigo.getId() != id){
+                amigosAux.add(naoAmigo);
+            }
+            testa = true;
+        }
+        return amigosAux;
+    }
+
+    
+
 }
