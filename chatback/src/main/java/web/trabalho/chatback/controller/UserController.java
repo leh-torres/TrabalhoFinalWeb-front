@@ -22,15 +22,15 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/cadastrar")
-    public String cadastrarUser(@RequestBody User user){
+    public boolean cadastrarUser(@RequestBody User user){
         if(user.getUsersAmigos() == null){
             user.setUsersAmigos(new ArrayList<>());
         }
         if(userRepository.findByEmail(user.getEmail()) == null){
         userRepository.save(user);
-        return "Salvado com sucesso!";
+        return true;
         }else{
-            return "email já cadastrado!";
+            return false;
         }
     }
 
