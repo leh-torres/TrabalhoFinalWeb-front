@@ -9,6 +9,16 @@
             "projectName": "lab_11_back",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ChatbackApplication<chatback>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "web.trabalho.chatback.ChatbackApplication",
+            "projectName": "chatback",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
