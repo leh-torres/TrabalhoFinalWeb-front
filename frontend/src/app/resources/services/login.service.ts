@@ -13,7 +13,7 @@ export class LoginService {
 
   public Entrar(requestLogin: RequestLogin): Observable<ResposeLogin>{
     console.log(requestLogin)
-    return this.httpClient.post<ResposeLogin>('http://localhost:8080/api/login', requestLogin)
+    return this.httpClient.post<ResposeLogin>('http://localhost:8080/login', requestLogin)
  
   }
 }
