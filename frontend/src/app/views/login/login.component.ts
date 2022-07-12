@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar} from '@angular/material/snack-bar'
+import { Router, RouterEvent } from '@angular/router';
+import { find, map } from 'rxjs';
+import { Usuarios } from 'src/app/resources/models/Usuarios';
 import { LoginService } from 'src/app/resources/services/login.service';
 
 @Component({
@@ -10,13 +13,14 @@ import { LoginService } from 'src/app/resources/services/login.service';
 export class LoginComponent implements OnInit {
 
   loginData={
-    username: '',
+    email: '',
     password: ''
   }
 
+  userLogin = new Usuarios()
   title = 'frontend';
 
-  constructor(private snack: MatSnackBar) {}
+  constructor(private snack: MatSnackBar, private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {
   }
@@ -25,8 +29,8 @@ export class LoginComponent implements OnInit {
   formSubmit(){
     console.log('console formSubmit')
 
-    if(this.loginData.username.trim() == '' || this.loginData.username ==null){
-      this.snack.open('O username não pode ser vazio!', '',{
+    if(this.loginData.email.trim() == '' || this.loginData.email ==null){
+      this.snack.open('O email não pode ser vazio!', '',{
         duration:3000,       
       })
       return
@@ -39,5 +43,21 @@ export class LoginComponent implements OnInit {
       return
     }
 
+    this.userLogin.email = this.loginData.email
+    this.userLogin.password = this.loginData.password
+
+    this.loginService.validaUser(this.userLogin)
+
+    if(window.localStorage.key(0) == 'invalidado'){
+      this.snack.open('Usuário não cadastrado', 'Voltar',{
+        duration:3000,       
+      })    
+      return
+    }
+    if(window.localStorage.key(0) == 'validado'){
+      this.router.navigate(['home'])
+    }
+   
+    
   }
 }
