@@ -14,6 +14,7 @@ import { HomeComponent } from './views/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { ChatComponent } from './views/chat/chat.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
     LoginComponent,
     CadastroComponent,
     HomeComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,
