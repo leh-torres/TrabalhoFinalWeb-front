@@ -53,24 +53,27 @@ export class CadastroComponent implements OnInit {
       this.snack.open('As senhas não podem ser diferentes!', 'Voltar',{
         duration:3000,       
       })
+    
       
-      this.user.name = this.formCadastro.value.nome
-      this.user.email = this.formCadastro.value.email
-      this.user.imageUrl = this.formCadastro.value.img
-      this.user.genero = this.formCadastro.value.genero
-      this.user.password = this.formCadastro.value.confirmSenha
-
       return
     }
-    console.log(this.user)
+
+    this.user.name = this.formCadastro.value.nome
+    this.user.email = this.formCadastro.value.email
+    this.user.imageUrl = this.formCadastro.value.img
+    this.user.genero = this.formCadastro.value.genero
+    this.user.password = this.formCadastro.value.confirmSenha
+
+    console.log(this.user.name)
+    console.log(this.user.email)
+    console.log(this.user.imageUrl)
+    console.log(this.user.genero)
+    console.log(this.user.password)
     let retorno = this.userService.addUser(this.user)
     this.formCadastro.reset(new DadosCadastro())
     
-    console.log(retorno.subscribe((erro) => 
-      {
-       console.log(erro) 
-      }
-    ))
-  }
+    console.log(retorno)
+
+    }
 
 }

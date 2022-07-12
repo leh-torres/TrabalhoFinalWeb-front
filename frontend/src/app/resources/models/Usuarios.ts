@@ -1,7 +1,7 @@
 export class Usuarios{
-    public name: string | undefined
-    public email: string | undefined
-    public genero: string | undefined
-    public imageUrl: string | undefined
-    public password: string | undefined
+    public name!: string 
+    public email!: string 
+    public genero!: string 
+    public imageUrl!: string 
+    public password!: string 
 }
