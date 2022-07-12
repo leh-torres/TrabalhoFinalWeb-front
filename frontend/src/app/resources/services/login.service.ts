@@ -9,11 +9,17 @@ import { Usuarios } from '../models/Usuarios';
 })
 export class LoginService {
 
+  private usuarioAutenticado: boolean = false
+
   constructor(private httpClient: HttpClient) { }
 
  validaUser(user: Usuarios){
     let key = 'validado'
     let key2 = 'invalidado'
+    let valor: any = [
+      user.email,
+      user.password
+    ]
     
     this.httpClient.post('http://localhost:8080/api/user/login', user)
       .subscribe(
@@ -21,14 +27,20 @@ export class LoginService {
           console.log(data)
           window.localStorage.clear()
           if(data == true){
-            window.localStorage.setItem(key, user.email)
+            this.usuarioAutenticado = true
+            window.localStorage.setItem(key, JSON.stringify(valor))
           } 
           if(data == false){
+            this.usuarioAutenticado = false
             window.localStorage.setItem(key2, user.email)
           }
         }
       )
-    
-
   }
+
+  usuarioEstaAutenticado(){
+    return this.usuarioAutenticado
+  }
+
+
 }

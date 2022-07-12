@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { ChatComponent } from './views/chat/chat.component';
+import { UserGuard } from './user.guard';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { ChatComponent } from './views/chat/chat.component';
     MatButtonModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [UserGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

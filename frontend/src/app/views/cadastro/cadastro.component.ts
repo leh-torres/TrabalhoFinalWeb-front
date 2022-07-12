@@ -4,6 +4,7 @@ import { DadosCadastro } from 'src/app/resources/models/Dadoscadastro';
 import  {  FormBuilder,  FormGroup  }  from  '@angular/forms';
 import { Usuarios } from 'src/app/resources/models/Usuarios';
 import { UserService } from 'src/app/resources/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -15,10 +16,14 @@ export class CadastroComponent implements OnInit {
   formCadastro!: FormGroup
   user = new Usuarios()
 
-  constructor(private snack: MatSnackBar, private formBuilder: FormBuilder, private userService: UserService) { }
+  constructor(private snack: MatSnackBar, 
+    private formBuilder: FormBuilder, 
+    private userService: UserService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.creatForm(new DadosCadastro())
+    
   }
 
   creatForm(dadosCadastro: DadosCadastro){
@@ -33,6 +38,7 @@ export class CadastroComponent implements OnInit {
   }
 
   onSubmit(){
+    
     console.log(this.formCadastro.value.senha)
 
     if(
@@ -54,7 +60,7 @@ export class CadastroComponent implements OnInit {
         duration:3000,       
       })
     
-      
+      document.getElementById('email')
       return
     }
 
@@ -69,11 +75,25 @@ export class CadastroComponent implements OnInit {
     console.log(this.user.imageUrl)
     console.log(this.user.genero)
     console.log(this.user.password)
-    let retorno = this.userService.addUser(this.user)
+    this.userService.addUser(this.user)
     this.formCadastro.reset(new DadosCadastro())
     
-    console.log(retorno)
-
+    {/*console.log(window.localStorage.key(0))
+    if(window.localStorage.key(0) == 'true'){
+      
+     
+      console.log('Usuario cadastrado com sucesso')
     }
-
+    if(window.localStorage.key(0) == 'false'){
+      console.log('Usuario não cadastrado')
+      this.snack.open('USUÁRIO JÁ CADASTRADO!', 'Voltar',{
+        duration:3000,       
+      })
+      
+      return
+      
+    }
+  window.localStorage.clear()*/}
+  this.router.navigate([''])
+  }
 }

@@ -3,8 +3,11 @@ package web.trabalho.chatback.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -43,8 +46,8 @@ public class UserController {
         }
     }
 
-    @GetMapping("/amigos")
-    public Iterable<User> retornaAmigos(@RequestHeader String email,@RequestHeader String password){
+    @GetMapping("/amigos/{email}/{password}")
+    public Iterable<User> retornaAmigos(@PathVariable String email,@PathVariable String password){
         int id = userRepository.findByEmailAndPassword(email,password).getId();
         List<User> amigos = userRepository.findById(id).get().getUsersAmigos();
         System.out.println(id);

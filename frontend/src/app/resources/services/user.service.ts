@@ -11,9 +11,14 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   public addUser(user: Usuarios){
-    return this.httpClient.post('http://localhost:8080/api/user/cadastrar', user, { observe: 'response' })
-     
+    this.httpClient.post('http://localhost:8080/api/user/cadastrar', user)
+     .subscribe(
+      data => {
+        console.log(data)
+      }
+     )
       
   }
   
+
 }
