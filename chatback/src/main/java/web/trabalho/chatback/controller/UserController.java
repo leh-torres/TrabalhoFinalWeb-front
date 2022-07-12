@@ -18,7 +18,7 @@ import web.trabalho.chatback.repository.UserRepository;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-    
+
     @Autowired
     private UserRepository userRepository;
 
@@ -73,28 +73,22 @@ public class UserController {
 
     @GetMapping("/pesquisaAmigos/{valor}")
     public Iterable<User> pesquisaAmigos(@RequestHeader String email,@RequestHeader String password,@PathVariable String valor){
-        int id = userRepository.findByEmailAndPassword(email,password).getId();
-        List<User> amigos = userRepository.findById(id).get().getUsersAmigos();
-        System.out.println(id);
+        User user = userRepository.findByEmailAndPassword(email,password);
+        List<User> amigos = user.getUsersAmigos();
         List<User> amigosAux = new ArrayList<>();
 
         for (User amigo : amigos) {
-            if(amigo.getName() == valor){
+            if(amigo.getName().equals(valor)){
                 amigosAux.add(amigo);
             }
         }
-        if(amigosAux == null){
-            for (User amigo : amigos) {
-                if(amigo.getEmail() == valor){
-                    amigosAux.add(amigo);
-                }
-            } 
-        }
-        if(amigosAux == null){
-            return null;
-        }else{
-            return amigosAux;
-        }
+        for (User amigo : amigos) {
+            if(amigo.getEmail().equals(valor)){
+                amigosAux.add(amigo);
+            }
+        } 
+
+        return amigosAux;
     }
 
     @GetMapping("/naoAmigos")
