@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -43,6 +44,17 @@ public class UserController {
         }
     }
 
+    @PostMapping("/cadastrarAmigo")
+    public boolean cadastrarAmigo(@RequestHeader String email,@RequestHeader String password, @RequestBody User user){
+        User userAtual = userRepository.findByEmailAndPassword(email,password);
+
+        List<User> auxUser =  userAtual.getUsersAmigos();
+        auxUser.add(user);
+        userAtual.setUsersAmigos(auxUser);
+        userRepository.save(userAtual);
+        return true;
+    }
+
     @GetMapping("/amigos")
     public Iterable<User> retornaAmigos(@RequestHeader String email,@RequestHeader String password){
         int id = userRepository.findByEmailAndPassword(email,password).getId();
@@ -59,12 +71,37 @@ public class UserController {
         return amigosAux;
     }
 
-    @GetMapping("/adicionarAmigos")
+    @GetMapping("/pesquisaAmigos/{valor}")
+    public Iterable<User> pesquisaAmigos(@RequestHeader String email,@RequestHeader String password,@PathVariable String valor){
+        int id = userRepository.findByEmailAndPassword(email,password).getId();
+        List<User> amigos = userRepository.findById(id).get().getUsersAmigos();
+        System.out.println(id);
+        List<User> amigosAux = new ArrayList<>();
+
+        for (User amigo : amigos) {
+            if(amigo.getName() == valor){
+                amigosAux.add(amigo);
+            }
+        }
+        if(amigosAux == null){
+            for (User amigo : amigos) {
+                if(amigo.getEmail() == valor){
+                    amigosAux.add(amigo);
+                }
+            } 
+        }
+        if(amigosAux == null){
+            return null;
+        }else{
+            return amigosAux;
+        }
+    }
+
+    @GetMapping("/naoAmigos")
     public Iterable<User> retornaUsuarios(@RequestHeader String email,@RequestHeader String password){
         int id = userRepository.findByEmailAndPassword(email,password).getId();
         List<User> amigos = userRepository.findById(id).get().getUsersAmigos();
         Iterable<User> naoAmigos = userRepository.findAll();
-        System.out.println(id);
         List<User> amigosAux = new ArrayList<>();
         boolean testa = true;
 
